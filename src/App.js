@@ -9,7 +9,11 @@ export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
-    selectedPlace: {}
+    selectedPlace: {},
+    places: [
+      {name:"Watermark", loc: {lat: 39.6410671, lng: -84.2873409}},
+      {name:"Bullwinkle's Top Hat Bistro", loc: {lat: 39.6426776, lng: -84.2889981}},
+    ]
   }
 
   onMarkerClick = (props, marker, e) => 
@@ -41,6 +45,7 @@ export class MapContainer extends Component {
           onClick={this.onMarkerClick}
           name={'Miamisburg, Ohio'}
         />
+
         <InfoWindow
         marker={this.state.activeMarker}
         visible={this.state.showingInfoWindow}
@@ -50,6 +55,14 @@ export class MapContainer extends Component {
            <h4>{this.state.selectedPlace.name}</h4>
           </div>
         </InfoWindow>
+
+        {this.state.places.map((place)=>(
+           <Marker
+           onClick={this.onMarkerClick}
+           name={place.name}
+           position={place.loc}
+           />
+        ))}
       </Map>
     );
   }
@@ -58,4 +71,5 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCcQ4sUMPkgiYOBLeFoEyPZ7kMyT53K2C4'
 })(MapContainer);
+
 //https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react
