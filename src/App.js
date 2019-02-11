@@ -6,15 +6,22 @@ const mapStyles = {
   heightL: '100%'
 }
 
-class App extends Component {
+export class MapContainer extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-        </header>
-      </div>
+      <Map
+      google={this.props.google}
+      zoom={17}
+      style={mapStyles}
+      initialCenter = {{
+        lat: 39.6417034,
+        lng: -84.2889354
+      }}
+      />
     );
   }
 }
 
-export default App;
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyCcQ4sUMPkgiYOBLeFoEyPZ7kMyT53K2C4'
+})(MapContainer);
